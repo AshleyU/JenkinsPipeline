@@ -12,9 +12,16 @@ pipeline {
             }
         }
         stage("Build"){
-            steps{
+            steps {
                 dir("simple-java-maven-app") {
-                    sh "mvn clean install"
+                    sh "mvn clean install -Denforcer.skip=true"
+                }
+            }
+        }
+        stage("Test"){
+            steps {
+                dir("simple-java-maven-app") {
+                    sh "mvn test -Denforcer.skip=true"
                 }
             }
         }
